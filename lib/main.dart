@@ -1,3 +1,4 @@
+import 'package:final_project/landing_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -32,8 +33,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-
       ),
+      body: LandingPage().landingPage(),
     );
   }
 }
