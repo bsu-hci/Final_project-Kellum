@@ -1,4 +1,6 @@
 class Project{
-  String thumbnailImg;
+  String thumbnailImg = null;
   String description;
+
+  Project(this.thumbnailImg, this.description);
 }

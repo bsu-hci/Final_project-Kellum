@@ -4,25 +4,32 @@ import 'package:flutter/widgets.dart';
 
 class LandingPage{
 
-  List<Project> projectList = [];
+  String _url = 'https://img.pngio.com/happy-smile-png-smiley-face-icon-png-transparent-png-480x480-transparent-happy-face-820_560.png';
 
   Widget landingPage(){
-    return GridView.builder(
-      itemCount: projectList.length,
-      itemBuilder: (BuildContext context, int index) {
-        return projectContainer(projectList[index]);
-      },
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 3, mainAxisSpacing: 5, crossAxisSpacing: 5,
-      ),
+    List<Project> projectList = [
+      new Project(_url, 'hello'),new Project(_url, 'hello'),
+      new Project(_url, 'hello'),new Project(_url, 'hello'),
+      new Project(_url, 'hello'),new Project(_url, 'hello'),
+      new Project(_url, 'hello'),new Project(_url, 'hello'),
+    ];
+    return GridView.count(
+      crossAxisCount: 3,
+      children: List.generate(projectList.length, (index) => projectContainer(projectList[index]))
     );
   }
 
-  Widget projectContainer(project) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      child: Image.network(project.thumbnailImg)
+  Widget projectContainer(Project project) {
+    return Center(
+      child: decideChild(project),
     );
+  }
+
+  Widget decideChild(Project project) {
+    if(project.thumbnailImg == null){
+      return Icon(Icons.thumb_up);
+    }
+    return Image.network(project.thumbnailImg);
   }
 
 }
