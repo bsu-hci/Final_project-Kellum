@@ -21,7 +21,7 @@ class _LandingPage extends State<LandingPage> {
 
   Widget decideChild(Project project) {
     if (project.thumbnailImg == null) {
-      return Icon(Icons.thumb_down_alt);
+      return null;
     }
 
     Widget txt = Center(
