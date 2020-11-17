@@ -31,7 +31,11 @@ class _LandingPage extends State<LandingPage> {
     return InkWell(
         onTap: () {
           setState(() {
-            show = 'text';
+            if(show == 'text'){
+              show = 'face';
+            }else{
+              show = 'text';
+            }
           });
         },
         onHover: (value){
