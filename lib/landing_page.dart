@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:final_project/project.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -27,9 +29,14 @@ class LandingPage{
 
   Widget decideChild(Project project) {
     if(project.thumbnailImg == null){
-      return Icon(Icons.thumb_up);
+      return Icon(Icons.thumb_down_alt);
     }
-    return Image.network(project.thumbnailImg);
+    return Tooltip(
+      child: Image.network(project.thumbnailImg),
+      message: project.description,
+      preferBelow: true,
+      showDuration: Duration(seconds: 2),
+    );
   }
 
 }
