@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:final_project/project.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -35,7 +33,7 @@ class LandingPage{
       child: Image.network(project.thumbnailImg),
       message: project.description,
       preferBelow: true,
-      showDuration: Duration(seconds: 2),
+      showDuration: Duration(milliseconds: 500),
     );
   }
 
