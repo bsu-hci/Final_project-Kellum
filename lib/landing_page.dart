@@ -25,14 +25,14 @@ class _LandingPage extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     List<Project> projectList = [
-      new Project(_url, 'hello1'),
-      new Project(_url, 'hello2'),
-      new Project(_url, 'hello3'),
-      new Project(_url, 'hello4'),
-      new Project(_url, 'hello5'),
-      new Project(_url, 'hello6'),
-      new Project(_url, 'hello7'),
-      new Project(_url, 'hello8'),
+      new Project(_url,'its a smiley face','hello1'),
+      new Project(_url,'its a smiley face','hello2'),
+      new Project(_url,'its a smiley face','hello3'),
+      new Project(_url,'its a smiley face','hello4'),
+      new Project(_url,'its a smiley face','hello5'),
+      new Project(_url,'its a smiley face','hello6'),
+      new Project(_url,'its a smiley face','hello7'),
+      new Project(_url,'its a smiley face','hello8'),
     ];
     List<ProjectCard> projectCards = [];
 

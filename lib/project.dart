@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+
+import 'chat_room.dart';
 
 class Project {
   String thumbnailImg;
   String description;
+  String title;
 
-  Project(this.thumbnailImg, this.description);
+  Project(this.thumbnailImg, this.description, this.title);
 }
 
 class ProjectCard extends StatelessWidget {
@@ -54,8 +58,43 @@ class _ProjectPage extends State<ProjectPage>{
   Widget build(BuildContext context) {
     Project project = widget.project;
     return Scaffold(
-      body: Text(project.description),
+      appBar: AppBar(
+        title: Text(project.title),
+        centerTitle: true,
+      ),
+      body: ProjectLayout(project: project)
     );
   }
 
+}
+
+class ProjectLayout extends StatelessWidget{
+
+  Project project;
+  bool isJudging;
+  ProjectLayout({@required this.project, this.isJudging=false});
+
+  @override
+  Widget build(BuildContext context) {
+    int count = 2;
+    if(isJudging) count = 3;
+    return Scaffold(
+      body: GridView.count(
+        crossAxisCount: count,
+        children: [
+          GridTile(
+            child: Stack(
+              children: [
+                Text(project.description),
+                Image.network(project.thumbnailImg),
+              ],
+            ),
+          ),
+          GridTile(
+            child: ChatRoom(),
+          )
+        ],
+      ),
+    );
+  }
 }
