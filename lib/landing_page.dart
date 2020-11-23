@@ -11,36 +11,15 @@ class _LandingPage extends State<LandingPage> {
   String _url =
       'https://img.pngio.com/happy-smile-png-smiley-face-icon-png-transparent-png-480x480-transparent-happy-face-820_560.png';
 
-  Widget projectContainer(Project project) {
-    return Center(
-      child: decideChild(project),
-    );
-  }
-
-  String show = 'face';
-
-  Widget decideChild(Project project) {
-    if (project.thumbnailImg == null) {
-      return null;
-    }
-
-    Widget txt = Center(
-      child: Text(project.description),
-    );
-    Image img = Image.network(project.thumbnailImg);
+  Widget projectContainer(ProjectCard card) {
     return InkWell(
-        onTap: () {
-          setState(() {
-            if(show == 'text'){
-              show = 'face';
-            }else{
-              show = 'text';
-            }
-          });
-        },
-        onHover: (value){
-        },
-        child: ProjectCard(face: img, text: txt, show: show));
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ProjectPage(project: card.project)));
+      },
+      onHover: (value) {
+      },
+      child: card,
+    );
   }
 
   @override
@@ -55,10 +34,14 @@ class _LandingPage extends State<LandingPage> {
       new Project(_url, 'hello7'),
       new Project(_url, 'hello8'),
     ];
+    List<ProjectCard> projectCards = [];
+
+    projectList.forEach(
+        (project) => projectCards.insert(0, new ProjectCard(project: project, show: "face")));
     return GridView.count(
         crossAxisCount: 3,
         shrinkWrap: true,
-        children: List.generate(projectList.length,
-            (index) => projectContainer(projectList[index])));
+        children: List.generate(projectCards.length,
+            (index) => projectContainer(projectCards[index])));
   }
 }

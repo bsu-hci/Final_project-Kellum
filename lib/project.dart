@@ -10,9 +10,13 @@ class Project {
 class ProjectCard extends StatelessWidget {
   Image face;
   Widget text;
-  String show = 'face';
+  String show;
+  Project project;
 
-  ProjectCard({@required this.face, @required this.text,this.show});
+  ProjectCard({@required this.project, @required this.show}){
+    this.face = Image.network(this.project.thumbnailImg);
+    this.text = Text(this.project.description);
+  }
 
   Widget getShowing() {
     Widget retWidget = face;
@@ -33,6 +37,25 @@ class ProjectCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return getShowing();
+  }
+
+}
+
+class ProjectPage extends StatefulWidget{
+  Project project;
+  ProjectPage({@required this.project});
+
+  @override
+  _ProjectPage createState() => _ProjectPage();
+}
+
+class _ProjectPage extends State<ProjectPage>{
+  @override
+  Widget build(BuildContext context) {
+    Project project = widget.project;
+    return Scaffold(
+      body: Text(project.description),
+    );
   }
 
 }
