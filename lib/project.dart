@@ -83,15 +83,15 @@ class ProjectLayout extends StatelessWidget{
         crossAxisCount: count,
         children: [
           GridTile(
-            child: Stack(
+            child: ListView(
               children: [
-                Text(project.description),
                 Image.network(project.thumbnailImg),
+                Text(project.description, textAlign: TextAlign.center,),
               ],
             ),
           ),
           GridTile(
-            child: ChatRoom(),
+            child:ChatRoom()
           )
         ],
       ),
