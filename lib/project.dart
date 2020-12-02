@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import 'JudgingPanel.dart';
 import 'chat_room.dart';
 
 class Project {
@@ -72,29 +73,54 @@ class ProjectLayout extends StatelessWidget{
 
   Project project;
   bool isJudging;
-  ProjectLayout({@required this.project, this.isJudging=false});
+  ProjectLayout({@required this.project, this.isJudging=true});
 
   @override
   Widget build(BuildContext context) {
-    int count = 2;
-    if(isJudging) count = 3;
+    Widget layout = _defaultLayout();
+    if(isJudging) {
+      layout = _judgingLayout();
+    }
     return Scaffold(
-      body: GridView.count(
-        crossAxisCount: count,
-        children: [
-          GridTile(
-            child: ListView(
-              children: [
-                Image.network(project.thumbnailImg),
-                Text(project.description, textAlign: TextAlign.center,),
-              ],
-            ),
+      body: layout,
+    );
+  }
+
+  Widget _defaultLayout() {
+    return GridView.count(
+      crossAxisCount: 2,
+      children: [
+        GridTile(
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              Image.network(project.thumbnailImg),
+              Text(project.description, textAlign: TextAlign.center,),
+            ],
           ),
-          GridTile(
-            child:ChatRoom()
-          )
-        ],
-      ),
+        ),
+        ChatRoom(),
+      ],
+    );
+  }
+
+  Widget _judgingLayout() {
+    return GridView.count(
+      crossAxisCount: 2,
+      children: [
+        GridTile(
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              Image.network(project.thumbnailImg),
+              Text(project.description, textAlign: TextAlign.center,),
+            ],
+          ),
+        ),
+        ChatRoom(),
+        JudgingPanel(),
+      ],
     );
   }
 }
+

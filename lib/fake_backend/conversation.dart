@@ -1,7 +1,7 @@
 class Conversation{
   static List<String> _conversations = [
     'sample text',
-    'other sampel text',
+    'other sample text',
     'sample question?',
     'sample answer'
   ];
