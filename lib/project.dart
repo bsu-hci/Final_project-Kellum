@@ -49,7 +49,8 @@ class ProjectCard extends StatelessWidget {
 
 class ProjectPage extends StatefulWidget {
   Project project;
-  ProjectPage({@required this.project});
+  bool isJudging;
+  ProjectPage({@required this.project, this.isJudging});
 
   @override
   _ProjectPage createState() => _ProjectPage();
@@ -71,12 +72,12 @@ class _ProjectPage extends State<ProjectPage> {
 class ProjectLayout extends StatelessWidget {
   Project project;
   bool isJudging;
-  ProjectLayout({@required this.project, this.isJudging = true});
+  ProjectLayout({@required this.project, this.isJudging = false});
 
   @override
   Widget build(BuildContext context) {
     Widget layout = _defaultLayout();
-    if (isJudging) {
+    if (isJudging && !project.judged) {
       layout = _judgingLayout();
     }
     return Scaffold(
@@ -123,7 +124,7 @@ class ProjectLayout extends StatelessWidget {
             ),
           ),
           ChatRoom(),
-          JudgingPanel(),
+          JudgingPanel(project),
         ],
       );
   }

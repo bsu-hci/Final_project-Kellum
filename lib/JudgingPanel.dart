@@ -1,14 +1,16 @@
 import 'dart:html';
-import 'dart:ui';
 
+import 'package:final_project/project.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
 class JudgingPanel extends StatefulWidget{
+  Project project;
+  JudgingPanel(this.project);
 
   @override
-  _JudgingPanel createState() => _JudgingPanel();
+  _JudgingPanel createState() => _JudgingPanel(this.project);
 
 }
 
@@ -17,16 +19,26 @@ class _JudgingPanel extends State<JudgingPanel> {
   double _value = 0.0;
   double _value1 = 0.0;
   double _value2 = 0.0;
+  Project project;
+
+  _JudgingPanel(this.project);
 
   @override
   Widget build(BuildContext context) {
     return GridTile(
-        child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
       children: [
         _quantitativeJudging(),
         _qualitativeJudging(),
+        RaisedButton(
+          child: Text('submit'),
+          onPressed: () {
+            setState(() {
+              project.judged = true;
+            });
+          },
+
+        )
       ],
     ));
   }
@@ -35,8 +47,7 @@ class _JudgingPanel extends State<JudgingPanel> {
     return Expanded(
       child: Column(
         children: [
-         Row(
-          children:[Text('valuable information'),
+        Text('valuable information'),
           Slider(
             min: 0,
             max: 5,
@@ -47,8 +58,8 @@ class _JudgingPanel extends State<JudgingPanel> {
                 _value = value;
               });
             },
-          ),]),
-          Row(children:[Text('more valuable information'),
+          ),
+          Text('more valuable information'),
           Slider(
             min: 0,
             max: 5,
@@ -57,8 +68,8 @@ class _JudgingPanel extends State<JudgingPanel> {
             onChanged: (double value) {
               _value = value;
             },
-          ),]),
-          Row(children:[Text('the most valued information'),
+          ),
+          Text('the most valued information'),
           Slider(
             min: 0,
             max: 5,
@@ -67,7 +78,7 @@ class _JudgingPanel extends State<JudgingPanel> {
             onChanged: (double value) {
               _value = value;
             },
-          )]),
+          ),
         ],
       ),
     );
