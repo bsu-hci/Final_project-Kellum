@@ -18,23 +18,23 @@ class ProjectCard extends StatelessWidget {
   String show;
   Project project;
 
-  ProjectCard({@required this.project, @required this.show}){
+  ProjectCard({@required this.project, @required this.show}) {
     this.face = Image.network(this.project.thumbnailImg);
     this.text = Text(this.project.description);
   }
 
   Widget getShowing() {
     Widget retWidget = face;
-    if(show == 'text'){
+    if (show == 'text') {
       retWidget = text;
     }
     return retWidget;
   }
 
-  void switchShowing(){
-    if(show == 'text'){
+  void switchShowing() {
+    if (show == 'text') {
       show = 'face';
-    }else{
+    } else {
       show = 'text';
     }
   }
@@ -43,10 +43,9 @@ class ProjectCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return getShowing();
   }
-
 }
 
-class ProjectPage extends StatefulWidget{
+class ProjectPage extends StatefulWidget {
   Project project;
   ProjectPage({@required this.project});
 
@@ -54,31 +53,28 @@ class ProjectPage extends StatefulWidget{
   _ProjectPage createState() => _ProjectPage();
 }
 
-class _ProjectPage extends State<ProjectPage>{
+class _ProjectPage extends State<ProjectPage> {
   @override
   Widget build(BuildContext context) {
     Project project = widget.project;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(project.title),
-        centerTitle: true,
-      ),
-      body: ProjectLayout(project: project)
-    );
+        appBar: AppBar(
+          title: Text(project.title),
+          centerTitle: true,
+        ),
+        body: ProjectLayout(project: project));
   }
-
 }
 
-class ProjectLayout extends StatelessWidget{
-
+class ProjectLayout extends StatelessWidget {
   Project project;
   bool isJudging;
-  ProjectLayout({@required this.project, this.isJudging=true});
+  ProjectLayout({@required this.project, this.isJudging = true});
 
   @override
   Widget build(BuildContext context) {
     Widget layout = _defaultLayout();
-    if(isJudging) {
+    if (isJudging) {
       layout = _judgingLayout();
     }
     return Scaffold(
@@ -95,7 +91,10 @@ class ProjectLayout extends StatelessWidget{
             shrinkWrap: true,
             children: [
               Image.network(project.thumbnailImg),
-              Text(project.description, textAlign: TextAlign.center,),
+              Text(
+                project.description,
+                textAlign: TextAlign.center,
+              ),
             ],
           ),
         ),
@@ -105,22 +104,25 @@ class ProjectLayout extends StatelessWidget{
   }
 
   Widget _judgingLayout() {
-    return GridView.count(
-      crossAxisCount: 2,
-      children: [
-        GridTile(
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              Image.network(project.thumbnailImg),
-              Text(project.description, textAlign: TextAlign.center,),
-            ],
+    return
+      GridView.count(
+        crossAxisCount: 2,
+        children: [
+          GridTile(
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                Image.network(project.thumbnailImg),
+                Text(
+                  project.description,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
-        ),
-        ChatRoom(),
-        JudgingPanel(),
-      ],
-    );
+          ChatRoom(),
+          JudgingPanel(),
+        ],
+      );
   }
 }
-

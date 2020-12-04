@@ -1,8 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class JudgingPanel extends StatelessWidget {
-  double _value = 0;
+
+class JudgingPanel extends StatefulWidget{
+
+  @override
+  _JudgingPanel createState() => _JudgingPanel();
+
+}
+
+
+class _JudgingPanel extends State<JudgingPanel> {
+  double _value = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +35,9 @@ class JudgingPanel extends StatelessWidget {
             max: 5,
             value: _value,
             onChanged: (double value) {
-              _value = value;
+              setState(() {
+                _value = value;
+              });
             },
           ),
           Slider(
