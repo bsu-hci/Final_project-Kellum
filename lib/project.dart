@@ -8,8 +8,10 @@ class Project {
   String thumbnailImg;
   String description;
   String title;
+  bool judged;
 
-  Project(this.thumbnailImg, this.description, this.title);
+  Project({this.thumbnailImg, this.description, this.title, this.judged = false});
+
 }
 
 class ProjectCard extends StatelessWidget {
